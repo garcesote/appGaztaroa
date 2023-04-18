@@ -11,19 +11,21 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '
 import { Icon } from 'react-native-elements';
 import QuienesSomos from './QuienesSomosComponent';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { colorGaztaroaClaro, colorGaztaroaOscuro } from '../comun/comun';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function HomeNavegador() {
+function HomeNavegador( {navigation} ) {
     return (
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
             headerMode: 'screen',
-            headerTintColor: '#fff',
-            headerStyle: { backgroundColor: '#015afc' },
-            headerTitleStyle: { color: '#fff' },
+            headerTintColor: colorGaztaroaOscuro,
+            headerStyle: { backgroundColor: colorGaztaroaClaro },
+            headerTitleStyle: { color: colorGaztaroaOscuro },
+            headerLeft: () => (<Icon name="menu" size={28} color= {colorGaztaroaOscuro} onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
             }}
         >
             <Stack.Screen
@@ -37,15 +39,16 @@ function HomeNavegador() {
     );
 }
 
-function ContactoNavegador() {
+function ContactoNavegador({navigation}) {
     return (
         <Stack.Navigator
             initialRouteName="Contacto"
             screenOptions={{
             headerMode: 'screen',
-            headerTintColor: '#fff',
-            headerStyle: { backgroundColor: '#015afc' },
-            headerTitleStyle: { color: '#fff' },
+            headerTintColor: colorGaztaroaOscuro,
+            headerStyle: { backgroundColor: colorGaztaroaClaro },
+            headerTitleStyle: { color: colorGaztaroaOscuro },
+            headerLeft: () => (<Icon name="menu" size={28} color= {colorGaztaroaOscuro} onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
             }}
         >
             <Stack.Screen
@@ -57,6 +60,61 @@ function ContactoNavegador() {
             />
         </Stack.Navigator>
     );
+}
+
+function QuienesSomosNavegador({navigation}) {
+  return (
+      <Stack.Navigator
+          initialRouteName="QuienesSomos"
+          screenOptions={{
+          headerMode: 'screen',
+          headerTintColor: colorGaztaroaOscuro,
+          headerStyle: { backgroundColor: colorGaztaroaClaro },
+          headerTitleStyle: { color: colorGaztaroaOscuro },
+          headerLeft: () => (<Icon name="menu" size={28} color= {colorGaztaroaOscuro} onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
+          }}
+      >
+          <Stack.Screen
+          name="QuienesSomos"
+          component={QuienesSomos}
+          options={{
+              title: 'Quienes Somos',
+          }}
+          />
+      </Stack.Navigator>
+  );
+}
+
+function CalendarioNavegador({navigation}) {
+  return (
+    <Stack.Navigator
+      initialRouteName="Calendario"
+      headerMode="float"
+      screenOptions={{
+        headerTintColor: colorGaztaroaOscuro,
+        headerStyle: { backgroundColor: colorGaztaroaClaro },
+        headerTitleStyle: { color: colorGaztaroaOscuro },
+      }}
+    >
+      <Stack.Screen
+        name="Calendario"
+        component={Calendario}
+        options={{
+          title: 'Calendario Gaztaroa',
+          headerLeft: () => (<Icon name="menu" size={28} color= {colorGaztaroaOscuro} onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
+
+        }}
+      />
+      <Stack.Screen
+        name="DetalleExcursion"
+        component={DetalleExcursion}
+        options={{
+          title: 'Detalle Excursión',
+          headerLeft: () => (<Icon name="arrow" size={28} color= {colorGaztaroaOscuro} onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
+        }}
+      />
+    </Stack.Navigator>
+  );
 }
 
 function CustomDrawerContent(props) {
@@ -77,7 +135,6 @@ function CustomDrawerContent(props) {
   );
 }
 
-
 function DrawerNavegador() {
     return (
         <Drawer.Navigator
@@ -86,7 +143,7 @@ function DrawerNavegador() {
         screenOptions={{
           headerShown: false,
           drawerStyle: {
-            backgroundColor: '#c2d3da',
+            backgroundColor: colorGaztaroaOscuro,
           },
         }}
         >
@@ -102,7 +159,7 @@ function DrawerNavegador() {
               )
             }}
           />
-          <Drawer.Screen name="QuinenesSomos" component={QuienesSomos}
+          <Drawer.Screen name="QuinenesSomos" component={QuienesSomosNavegador}
           options={{
             drawerIcon: ({ tintColor}) => (
               <Icon
@@ -139,37 +196,6 @@ function DrawerNavegador() {
           />
         </Drawer.Navigator>
     );
-}
- 
-function CalendarioNavegador() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Calendario"
-      headerMode="float"
-      screenOptions={{
-        headerTintColor: '#fff',
-        headerStyle: { backgroundColor: '#015afc' },
-        headerTitleStyle: { color: '#fff' },
-        headerLeft: () => (<Icon name="menu" size={28} color= 'white' onPress={ () => navigation.dispatch(DrawerActions.toggleDrawer()) }/>)
-      }}
-
-    >
-      <Stack.Screen
-        name="Calendario"
-        component={Calendario}
-        options={{
-          title: 'Calendario Gaztaroa',
-        }}
-      />
-      <Stack.Screen
-        name="DetalleExcursion"
-        component={DetalleExcursion}
-        options={{
-          title: 'Detalle Excursión',
-        }}
-      />
-    </Stack.Navigator>
-  );
 }
 
 class Campobase extends Component {

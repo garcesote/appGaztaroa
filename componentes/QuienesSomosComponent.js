@@ -3,6 +3,7 @@ import { ACTIVIDADES } from "../comun/actividades";
 import { Avatar, Card, ListItem, Text } from "react-native-elements";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { baseUrl } from "../comun/comun";
 
 class QuienesSomos extends Component{
 
@@ -20,7 +21,7 @@ class QuienesSomos extends Component{
                 <ListItem
                 key={index}
                 bottomDivider>
-                    <Avatar source={require('./imagenes/40Años.png')} />
+                    <Avatar source={{uri: baseUrl + item.imagen}} />
                     <ListItem.Content>
                         <ListItem.Title>{item.nombre}</ListItem.Title>
                         <ListItem.Subtitle>{item.descripcion}</ListItem.Subtitle>
